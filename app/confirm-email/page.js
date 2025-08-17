@@ -1,10 +1,10 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle, XCircle, Mail } from 'lucide-react';
 
-const ConfirmEmailPage = () => {
+const ConfirmEmailContent = () => {
   const [status, setStatus] = useState('loading'); // loading, success, error
   const [message, setMessage] = useState('');
   const searchParams = useSearchParams();
@@ -131,6 +131,14 @@ const ConfirmEmailPage = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const ConfirmEmailPage = () => {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-900 flex items-center justify-center"><div className="text-white">Loading...</div></div>}>
+      <ConfirmEmailContent />
+    </Suspense>
   );
 };
 
